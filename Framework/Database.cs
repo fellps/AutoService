@@ -1,4 +1,4 @@
-﻿using AutoService.DAL;
+﻿using AutoService.Models;
 using System;
 using System.IO;
 
@@ -14,7 +14,8 @@ namespace AutoService.Framework
         {
             using (var conn = SQLiteConnection.Instance.GetConnection())
             {
-                conn.CreateTable<Configuration>();
+                conn.CreateTable<ConfigurationModel>();
+                conn.CreateTable<MotorizedCardReaderModel>();
             }
         }
     }

@@ -133,7 +133,9 @@
     <Compile Include="Business\Business.cs" />
     <Compile Include="Business\HomeBusiness.cs" />
     <Compile Include="Business\MainBusiness.cs" />
-    <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="Framework\SQLite\SQLite.cs" />
+    <Compile Include="Framework\SQLite\SQLiteAsync.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Framework\Database.cs" />
     <Compile Include="Framework\IMotorizedCardReader.cs" />
     <Compile Include="Framework\MotorizedCardReader.cs" />
@@ -141,15 +143,15 @@
     <Compile Include="Framework\SQLiteConnection.cs" />
     <Compile Include="Models\Enums\MotorizedCardReaderEnum.cs" />
     <Compile Include="Models\MotorizedCardReaderModel.cs" />
+    <Compile Include="Repository\ConfigurationRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -161,10 +163,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,7 +198,7 @@
     <Resource Include="Assets\Media\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Media\splash_screen.png" />
+    <SplashScreen Include="Assets\Media\splash_screen.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

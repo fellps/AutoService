@@ -15,13 +15,7 @@ namespace AutoService
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : PrismApplication
-    { 
-        public App()
-        {
-            if (!File.Exists(Database.DbPath))
-                Database.CreateDatabase();
-        }
-
+    {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
         }

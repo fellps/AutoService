@@ -20,7 +20,7 @@ namespace AutoService.Framework
         [DllImport(@"D:\ModuleV30.dll", EntryPoint = "CRT310_MovePosition", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int CRT310_MovePosition(IntPtr comHandle, byte position);
 
-        public object CommOpen(MotorizedCardReaderModel motorizedCardReader)
+        public object CommOpen(Models.MotorizedCardReaderModel motorizedCardReader)
         {
             ComHandle = CommOpenWithBaut(motorizedCardReader.Port, motorizedCardReader.Baut);
             if (ComHandle.ToInt32() == 0)

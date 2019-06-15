@@ -1,9 +1,9 @@
 ﻿using SQLite;
 using System;
 
-namespace AutoService.DAL
+namespace AutoService.Models
 {
-    public class Configuration
+    public class ConfigurationModel
     {
         [PrimaryKey]
         public Guid IdConfiguration { get; set; }

@@ -9,5 +9,10 @@
         public override void InitializeComponents()
         {
         }
+
+        internal void Exit()
+        {
+            App.Current.Shutdown();
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class SQLiteConnection
     {
-        private static SQLiteConnection instance;
+        private static SQLiteConnection instance = null;
         private SQLite.SQLiteConnection connection;
         private SQLite.SQLiteAsyncConnection asyncConnection;
         private static readonly object thisLock = new object();

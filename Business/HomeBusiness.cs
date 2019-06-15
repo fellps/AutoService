@@ -1,6 +1,6 @@
-﻿using AutoService.Framework;
-using AutoService.Models;
+﻿using AutoService.Models;
 using AutoService.Models.Enums;
+using AutoService.Repository;
 using Reactive.Bindings;
 using System;
 
@@ -16,7 +16,13 @@ namespace AutoService.Business
         {
             try
             {
-                MotorizedCardReader.Instance(SelectedMotorizedCardReader.Value);
+                ConfigurationRepository.Insert(new ConfigurationModel
+                {
+                    IdConfiguration = Guid.NewGuid(),
+                    IdMotorizedCardReader = SelectedMotorizedCardReader.Value.IdMotorizedCardReader
+                });
+
+                Framework.MotorizedCardReader.Instance(SelectedMotorizedCardReader.Value);
 
                 Text.Value = "Conexão realizada com sucesso!";
             }
@@ -28,8 +34,8 @@ namespace AutoService.Business
 
             try
             {
-                MotorizedCardReader.Instance().MovePosition(0x2E);
-                MotorizedCardReader.Instance().MovePosition(0x31);
+                Framework.MotorizedCardReader.Instance().MovePosition(0x2E);
+                Framework.MotorizedCardReader.Instance().MovePosition(0x31);
 
                 Text.Value = "Comando enviado para o dispositivo!";
             }

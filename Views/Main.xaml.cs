@@ -1,5 +1,7 @@
-﻿using Prism.Ioc;
+﻿using AutoService.Framework;
+using Prism.Ioc;
 using Prism.Regions;
+using System.IO;
 using System.Windows;
 using Unity.Attributes;
 
@@ -19,6 +21,9 @@ namespace AutoService.Views
         public Main()
         {
             InitializeComponent();
+
+            if (!File.Exists(Database.DbPath))
+                Database.CreateDatabase();
         }
 
         public void OnLoaded(object sender, RoutedEventArgs e)

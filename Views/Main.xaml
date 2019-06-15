@@ -8,7 +8,11 @@
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="AutoService" Height="800" Width="800" WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="AutoService" Height="800" Width="800"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -41,11 +45,10 @@
                             <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False" x:Name="MenuToggleButton"/>
                             <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                                 <StackPanel>
-                                    <Button Content="Hello World" />
-                                    <Button Content="Nice Popup" />
-                                    <Button Content="Can't Touch This" IsEnabled="False" />
+                                    <Button Content="Auto Serviço" IsEnabled="False" />
+                                    <Button Content="Configurações" />
                                     <Separator/>
-                                    <Button Content="Goodbye" />
+                                    <Button Command="{Binding ExitCommand}" Content="Sair" />
                                 </StackPanel>
                             </materialDesign:PopupBox>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">NUGO</TextBlock>
