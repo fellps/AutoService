@@ -9,7 +9,7 @@ namespace AutoService.Framework
         private static IMotorizedCardReader _instance;
         private static readonly object _mutex = new object();
 
-        public static IMotorizedCardReader Instance(Models.MotorizedCardReaderModel motorizedCardReader = null)
+        public static IMotorizedCardReader Instance(MotorizedCardReaderModel motorizedCardReader = null)
         {
             if (_instance == null)
             {
@@ -25,7 +25,7 @@ namespace AutoService.Framework
             return _instance;
         }
 
-        private static IMotorizedCardReader InitializeMotorizedCardReader(Models.MotorizedCardReaderModel motorizedCardReader)
+        private static IMotorizedCardReader InitializeMotorizedCardReader(MotorizedCardReaderModel motorizedCardReader)
         {
             switch (motorizedCardReader.Type)
             {

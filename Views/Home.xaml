@@ -23,7 +23,8 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Margin="16" VerticalAlignment="Top">
             <StackPanel>
-                <ComboBox ItemsSource="{Binding MotorizedCardReaderCollection}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedMotorizedCardReader.Value}" materialDesign:HintAssist.Hint="Modelo" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
+                <ComboBox ItemsSource="{Binding MotorizedCardReaderCollection}" DisplayMemberPath="Name" SelectedValue="{Binding SelectedMotorizedCardReader.Value}" 
+                    materialDesign:HintAssist.Hint="Modelo" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
                 <ComboBox materialDesign:HintAssist.Hint="Porta" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0">
                     <ComboBoxItem IsSelected="True">COM1</ComboBoxItem>
                     <ComboBoxItem>COM2</ComboBoxItem>

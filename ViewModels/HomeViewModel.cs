@@ -8,7 +8,7 @@ namespace AutoService.ViewModels
     public class HomeViewModel : BindableBase
     {
         public ReactiveCommand SaveCommand { get; set; }
-        public ReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { set; get; }
+        public ReadOnlyReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { set; get; }
         public ReactiveProperty<string> Text { get; set; }
         public ReactiveProperty<MotorizedCardReaderModel> SelectedMotorizedCardReader { set;  get; }
 

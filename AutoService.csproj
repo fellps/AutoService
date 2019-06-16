@@ -145,6 +145,7 @@
     <Compile Include="Models\MotorizedCardReaderModel.cs" />
     <Compile Include="Repository\ConfigurationRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\MotorizedCardReaderRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">

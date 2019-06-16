@@ -52,6 +52,21 @@ namespace AutoService.Repository
             }
         }
 
+        public static void DeleteAll<P>()
+        {
+            using (var conn = Framework.SQLiteConnection.Instance.GetConnection())
+            {
+                try
+                {
+                    conn.DeleteAll<P>();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
         public static List<P> GetList<P>(Expression<Func<P, bool>> predicate) where P : new()
         {
             using (var conn = Framework.SQLiteConnection.Instance.GetConnection())

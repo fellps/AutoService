@@ -1,24 +1,24 @@
 ﻿using AutoService.Models;
-using AutoService.Models.Enums;
 using AutoService.Repository;
 using Reactive.Bindings;
 using System;
+using System.Reactive.Linq;
 
 namespace AutoService.Business
 {
     public class HomeBusiness : Business
     {
         public ReactiveProperty<string> Text { get; set; }
-        public ReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { set; get; }
+        public ReadOnlyReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { set; get; }
         public ReactiveProperty<MotorizedCardReaderModel> SelectedMotorizedCardReader { set; get; }
 
         internal void Save()
         {
             try
             {
-                ConfigurationRepository.Insert(new ConfigurationModel
+                ConfigurationRepository.InsertOrUpdate(new ConfigurationModel
                 {
-                    IdConfiguration = Guid.NewGuid(),
+                    IdConfiguration = Guid.Parse("fe0fd1c8-a760-41dd-8b7d-8916b1337bc8"),
                     IdMotorizedCardReader = SelectedMotorizedCardReader.Value.IdMotorizedCardReader
                 });
 
@@ -39,20 +39,20 @@ namespace AutoService.Business
 
                 Text.Value = "Comando enviado para o dispositivo!";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Text.Value = "Não foi possível enviar o comando para o dispositivo!";
             }
         }
 
         public override void InitializeComponents()
         {
-            MotorizedCardReaderCollection = new ReactiveCollection<MotorizedCardReaderModel>
-            {
-                new MotorizedCardReaderModel { Name = "MT318V4", Port="COM2", Baut=9600, Type = MotorizedCardReaderEnum.MT318V4 }
-            };
+            var configuration = ConfigurationRepository.GetConfiguration();
+            var selectedMCR = MotorizedCardReaderRepository.GetByIdMotorizedCardReader(configuration?.IdMotorizedCardReader);
 
-            SelectedMotorizedCardReader = new ReactiveProperty<MotorizedCardReaderModel>();
+            MotorizedCardReaderCollection = MotorizedCardReaderRepository.GetAll().ToObservable().ToReadOnlyReactiveCollection();
+            SelectedMotorizedCardReader = new ReactiveProperty<MotorizedCardReaderModel>(selectedMCR);
 
             Text = new ReactiveProperty<string>();
         }
