@@ -23,36 +23,14 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Margin="16" VerticalAlignment="Top">
             <StackPanel>
+                <TextBox Text="{Binding Name.Value,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
+                 Margin="5" />
                 <ComboBox ItemsSource="{Binding MotorizedCardReaderCollection}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedMotorizedCardReader.Value}" 
                     materialDesign:HintAssist.Hint="Modelo" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
-                <ComboBox materialDesign:HintAssist.Hint="Porta" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0">
-                    <ComboBoxItem IsSelected="True">COM1</ComboBoxItem>
-                    <ComboBoxItem>COM2</ComboBoxItem>
-                    <ComboBoxItem>COM3</ComboBoxItem>
-                    <ComboBoxItem>COM4</ComboBoxItem>
-                    <ComboBoxItem>COM5</ComboBoxItem>
-                    <ComboBoxItem>COM6</ComboBoxItem>
-                    <ComboBoxItem>COM7</ComboBoxItem>
-                    <ComboBoxItem>COM8</ComboBoxItem>
-                    <ComboBoxItem>COM9</ComboBoxItem>
-                    <ComboBoxItem>COM10</ComboBoxItem>
-                    <ComboBoxItem>COM11</ComboBoxItem>
-                    <ComboBoxItem>COM12</ComboBoxItem>
-                    <ComboBoxItem>COM13</ComboBoxItem>
-                    <ComboBoxItem>COM14</ComboBoxItem>
-                    <ComboBoxItem>COM15</ComboBoxItem>
-                    <ComboBoxItem>COM16</ComboBoxItem>
-                    <ComboBoxItem>COM17</ComboBoxItem>
-                    <ComboBoxItem>COM18</ComboBoxItem>
-                    <ComboBoxItem>COM19</ComboBoxItem>
-                    <ComboBoxItem>COM20</ComboBoxItem>
-                </ComboBox>
-                <ComboBox materialDesign:HintAssist.Hint="Baut Rate" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0">
-                    <ComboBoxItem IsSelected="True">9600</ComboBoxItem>
-                    <ComboBoxItem>19200</ComboBoxItem>
-                    <ComboBoxItem>38400</ComboBoxItem>
-                    <ComboBoxItem>115200</ComboBoxItem>
-                </ComboBox>
+                <ComboBox ItemsSource="{Binding PortCollection}"  
+                    materialDesign:HintAssist.Hint="Porta" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
+                <ComboBox ItemsSource="{Binding BautRateCollection}"  
+                    materialDesign:HintAssist.Hint="Baut Rate" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="0" Margin="16" VerticalAlignment="Top">

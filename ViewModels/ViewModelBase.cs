@@ -6,9 +6,6 @@ namespace AutoService.ViewModels
     {
         public ViewModelBase()
         {
-            InitializeComponents();
         }
-
-        public abstract void InitializeComponents();
     }
 }

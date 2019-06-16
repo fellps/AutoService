@@ -6,15 +6,15 @@ namespace AutoService.ViewModels
     {
         public ReactiveCommand ExitCommand { get; set; }
 
-        public void Exit()
-        {
-            App.Current.Shutdown();
-        }
-
-        public override void InitializeComponents()
+        public MainViewModel()
         {
             ExitCommand = new ReactiveCommand();
             ExitCommand.Subscribe(Exit);
+        }
+
+        public void Exit()
+        {
+            App.Current.Shutdown();
         }
     }
 }
