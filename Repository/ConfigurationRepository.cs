@@ -17,7 +17,7 @@ namespace AutoService.Repository
         {
             using (var conn = Framework.SQLiteConnection.Instance.GetConnection())
             {
-                Guid idConfiguration = Guid.Parse("fe0fd1c8-a760-41dd-8b7d-8916b1337bc8");
+                Guid idConfiguration = Guid.Empty;
                 return conn.Table<ConfigurationModel>().Where(c => c.IdConfiguration == idConfiguration).FirstOrDefault();
             }
         }

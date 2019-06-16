@@ -130,9 +130,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Business\Business.cs" />
-    <Compile Include="Business\HomeBusiness.cs" />
-    <Compile Include="Business\MainBusiness.cs" />
     <Compile Include="Framework\SQLite\SQLite.cs" />
     <Compile Include="Framework\SQLite\SQLiteAsync.cs" />
     <Compile Include="Models\ConfigurationModel.cs" />
@@ -148,6 +145,7 @@
     <Compile Include="Repository\MotorizedCardReaderRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
