@@ -4,7 +4,7 @@ namespace AutoService.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ReactiveCommand ExitCommand { get; set; }
+        public ReactiveCommand ExitCommand { get; private set; }
 
         public MainViewModel()
         {

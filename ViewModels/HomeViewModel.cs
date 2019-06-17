@@ -1,6 +1,7 @@
 ﻿using AutoService.Models;
 using AutoService.Repository;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,34 +11,40 @@ namespace AutoService.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        public ReactiveCommand SaveCommand { get; set; }
-        public ReadOnlyReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { set; get; }
-        public ReadOnlyReactiveCollection<string> PortCollection { set; get; }
-        public ReactiveCollection<int> BautRateCollection { set; get; }
-        public ReactiveProperty<string> Text { get; set; }
-        public ReactiveProperty<MotorizedCardReaderModel> SelectedMotorizedCardReader { set;  get; }
-
+        #region Propriedades
         [Required(ErrorMessage = "The name is required.")]
         [StringLength(100, ErrorMessage = "The name length should be lower than 30.")]
-        public ReactiveProperty<string> Name { get; set; }
+        public ReactiveProperty<string> Name { get; private set; }
+        public ReactiveCommand SaveCommand { get; private set; }
+        public ReadOnlyReactiveCollection<MotorizedCardReaderModel> MotorizedCardReaderCollection { get; private set; }
+        public ReadOnlyReactiveCollection<string> PortCollection { get; private set; }
+        public ReactiveCollection<int> BautRateCollection { get; private set; }
+        public ReactiveProperty<MotorizedCardReaderModel> SelectedMotorizedCardReader { get; private set; }
+        #endregion
 
         public HomeViewModel()
         {
-
             var configuration = ConfigurationRepository.GetConfiguration();
             var listMCR = MotorizedCardReaderRepository.GetAll();
             var selectedMCR = listMCR.Where(m => m.IdMotorizedCardReader == configuration?.IdMotorizedCardReader).FirstOrDefault();
 
             SelectedMotorizedCardReader = new ReactiveProperty<MotorizedCardReaderModel>(selectedMCR);
-
-            MotorizedCardReaderCollection = listMCR.ToObservable().ToReadOnlyReactiveCollection();
-            PortCollection = Observable.Range(1, 30).Select(i => $"COM{i}").ToReadOnlyReactiveCollection();
-            BautRateCollection = new ReactiveCollection<int>() { 9600, 19200, 38400, 115200 };
+            SelectedMotorizedCardReader.PropertyChanged += (_, e) => Save();
 
             Name = new ReactiveProperty<string>().SetValidateAttribute(() => Name);
-            Text = new ReactiveProperty<string>();
+            MotorizedCardReaderCollection = listMCR.ToObservable().ToReadOnlyReactiveCollection();
+            BautRateCollection = new ReactiveCollection<int>() { 9600, 19200, 38400, 115200 };
+            PortCollection = Observable.Range(1, 30)
+                .Select(i => $"COM{i}")
+                .ToReadOnlyReactiveCollection();
 
-            SelectedMotorizedCardReader.PropertyChanged += (_, e) => Save();
+            SaveCommand = new[]
+            {
+                Name.ObserveHasErrors
+            }
+            .CombineLatestValuesAreAllFalse()
+            .ToReactiveCommand(false)
+            .WithSubscribe(Save);
         }
 
         public void Save()
@@ -49,28 +56,26 @@ namespace AutoService.ViewModels
                     IdConfiguration = Guid.Empty,
                     IdMotorizedCardReader = SelectedMotorizedCardReader.Value.IdMotorizedCardReader
                 });
-
-                Framework.MotorizedCardReader.Instance(SelectedMotorizedCardReader.Value);
-
-                Text.Value = "Conexão realizada com sucesso!";
+                SnackBarMessage("Configuração atualizada!");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Text.Value = "Não foi possível conectar ao dispositivo!";
+                SnackBarMessage("Erro ao atualizar configuração!");
             }
 
             try
             {
+                Framework.MotorizedCardReader.Instance(SelectedMotorizedCardReader.Value);
                 Framework.MotorizedCardReader.Instance().MovePosition(0x2E);
                 Framework.MotorizedCardReader.Instance().MovePosition(0x31);
 
-                Text.Value = "Comando enviado para o dispositivo!";
+                SnackBarMessage("Comando enviado para o dispositivo!");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Text.Value = "Não foi possível enviar o comando para o dispositivo!";
+                SnackBarMessage("Não foi possível enviar o comando para o dispositivo!");
             }
         }
     }

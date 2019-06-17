@@ -17,13 +17,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="16" VerticalAlignment="Top">
             <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}">Configurações</TextBlock>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" Margin="16" VerticalAlignment="Top">
             <StackPanel>
-                <TextBox Text="{Binding Name.Value,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Name.Value, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"
                  Margin="5" />
                 <ComboBox ItemsSource="{Binding MotorizedCardReaderCollection}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedMotorizedCardReader.Value}" 
                     materialDesign:HintAssist.Hint="Modelo" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0 16 0 0" />
@@ -34,7 +35,10 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="0" Margin="16" VerticalAlignment="Top">
-            <Button Command="{Binding SaveCommand}" ToolTip="MaterialDesignFlatDarkButton" HorizontalAlignment="Right">Salvar</Button>
+            <Button Command="{Binding SaveCommand}" ToolTip="Salvar" HorizontalAlignment="Right">Salvar</Button>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="16 0 16 0" VerticalAlignment="Bottom">
+            <materialDesign:Snackbar MessageQueue="{Binding CustomSnackBarMessageQueue}" HorizontalAlignment="Stretch" />
         </Grid>
     </Grid>
 </UserControl>
